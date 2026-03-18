@@ -1,0 +1,30 @@
+# Data and Results
+Data/
+Results/
+Old_Results/
+
+# Binaries and Objects
+main
+diff
+rgb_link_diff
+database_gen
+*.o
+*.exe
+*.out
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Documentation and Analysis
+*.xlsx
+*.csv
+.gemini/
+scripts/*.py~
+scripts/__pycache__/
+
+# System
+.DS_Store
+Thumbs.db
