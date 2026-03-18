@@ -1,0 +1,12 @@
+Class: person
+  Total RGB BKM: 4,199,009.60
+  Total Thermal BKM: 200,961.27
+
+Class: bicycle
+  Total RGB BKM: 13,711,924.41
+  Total Thermal BKM: 3,829,520.89
+
+Class: e-scooter
+  Total RGB BKM: 113,722.42
+  Total Thermal BKM: 0.00
+

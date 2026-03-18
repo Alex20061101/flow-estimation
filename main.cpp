@@ -64,47 +64,48 @@ vector<double> link_lengths = {
 // Formulas are 1-indexed. link_formulas[1] is Link 1.
 vector<pair<string, string>> link_formulas = {
     {"", ""}, // placeholder
-    {"avg((t2b5+t2b3),t1a1)", "avg((t2b2+t2b1), t1a2)"},        // 1: (1,2)
-    {"t2b4+t2b3", "t2b6+t2b1"},                                // 2: (2,3)
+    {"avg((t2b5+t2b3),t1b3)", "avg((t2b2+t2b1),t1b1)"}, // 1: (1,2)
+    {"avg((t2b4+t2b3),t1b3)", "avg((t2b6+t2b1),t1b1)"}, // 2: (2,3)
     {"avg((t2b5+t2b6),t9a1,t10a1)", "avg((t2b2+t2b4),t9a2,t10a2)"}, // 3: (2,10)
-    {"avg(t3b3+t3b5, t4b1+t4b2)", "avg(t3b1+t3b2, t4b1+t4b2)"}, // 4: (3,4) (guessed mirrors RGB Site 4)
-    {"avg(t3b3+t3b4, t4b1+t4b6)", "avg(t3b1+t3b6, t4b2+t4b4)"}, // 5: (4,5) (inferred)
-    {"avg(t3b5+t3b6, t4b2+t4b4)", "avg(t3b2+t3b4, t4b4+t4b5)"}, // 6: (4,11) (inferred)
-    {"avg((t9a1+t9a2), t5a1)", "avg((t9a2+t10a2), t5a2)"},        // 7: (6,7) (simplified average logic)
-    {"avg((t9a1+t9a2), t6a1)", "avg((t9a2+t10a2), t6a2)"},        // 8: (7,9) (mirrors RGB)
-    {"avg(t7a1, t8a1)", "avg(t7a2, t8a2)"},                      // 9: (9,12)
-    {"t9a1", "t9a2"},                                            // 10: (10,12)
-    {"t1a1", "t1a2"},                                             // 11
-    {"link[2]-link[4]", "link[2]-link[4]"},                       // 12 (derived)
-    {"t9a1+t10a1", "t9a2+t10a2"},                                // 13
-    {"link[5]-link[6]", "link[5]-link[6]"},                       // 14 (derived)
-    {"t7a1", "t7a2"},                                            // 15
-    {"t7a2", "t7a1"},                                            // 16
-    {"link[6]+link[14]", "link[12]+link[18]"},                   // 17 (derived - logic as per user)
-    {"t9a1", "t9a2"}                                             // 18
+    {"avg(t3b3,t4b3)+avg(t3b5,t4b5)", "avg(t3b1,t4b1)+avg(t3b2,t4b2)"}, // 4: (3,4) (5or6 logic)
+    {"avg(t3b3,t4b3)+avg(t3b4,t4b4)", "avg(t3b1,t4b1)+avg(t3b6,t4b6)"}, // 5: (4,5)
+    {"avg(t3b5,t4b5)+avg(t3b6,t4b6)", "avg(t3b2,t4b2)+avg(t3b4,t4b4)"}, // 6: (4,11)
+    {"avg(t5a2,t6a2)", "avg(t5a1,t6a1)"}, // 7: (6,7)
+    {"avg(t5a2,t6a2)", "avg(t5a1,t6a1)"}, // 8: (7,9)
+    {"avg(t7a1,t8a1)", "avg(t7a2,t8a2)"}, // 9: (9,12)
+    {"avg(t9a1,t10a1)", "avg(t9a2,t10a2)"}, // 10: (10,12)
+    {"2a1", "2a2"}, // 11
+    {"glink[2]-glink[4]", "glink[2]-glink[4]"}, // 12
+    {"10b5+10b3", "10b1+10b2"}, // 13
+    {"glink[5]-glink[6]", "glink[5]-glink[6]"}, // 14
+    {"16a1", "16a2"}, // 15
+    {"16a2", "16a1"}, // 16
+    {"glink[6]+glink[14]", "glink[12]+glink[18]"}, // 17 (Actually computed in computeLink17, but kept for clarity)
+    {"15a1", "15a2"}  // 18
 };
 
 vector<pair<string, string>> link_formulas_ground = {
     {"", ""}, // placeholder
-    {"avg((3b3+3b5), 2a2)", "avg((3b1+3b2), 2a1)"},      // 1: (1,2)
-    {"3b3+3b4", "3b1+3b6"},                              // 2: (2,3)
-    {"avg((3b5+3b6), 18a1)", "avg((3b2+3b4), 18a2)"},    // 3: (2,10)
-    {"5b3+5b5", "5b1+5b2"},                              // 4: (3,4) (5 represents 5or6)
-    {"5b3+5b4", "5b1+5b6"},                              // 5: (4,5)
-    {"5b5+5b6", "5b2+5b4"},                              // 6: (4,11)
-    {"avg((10b4+10b5), 12a1)", "avg((10b2+10b6), 12a2)"},// 7: (6,7)
-    {"avg((10b4+10b5), 12a1)", "avg((10b2+10b6), 12a2)"},// 8: (7,9)
-    {"13a1", "13a2"},                                    // 9: (9,12)
-    {"18a1", "18a2"},                                    // 10: (10,12)
-    {"2a1", "2a2"},                                      // 11
-    {"link[2]-link[4]", "link[2]-link[4]"},               // 12
-    {"10b5+10b3", "10b1+10b2"},                          // 13
-    {"link[5]-link[6]", "link[5]-link[6]"},               // 14
-    {"16a1", "16a2"},                                    // 15
-    {"16a2", "16a1"},                                    // 16
-    {"link[6]+link[14]", "link[12]+link[18]"},           // 17
-    {"15a1", "15a2"}                                     // 18
+    {"avg((3b3+3b5),2a2)", "avg((3b1+3b2),2a1)"}, // 1: (1,2)
+    {"3b3+3b4", "3b1+3b6"}, // 2: (2,3)
+    {"avg((3b5+3b6),18a1)", "avg((3b2+3b4),18a2)"}, // 3: (2,10)
+    {"avg(5b3,6b3)+avg(5b5,6b5)", "avg(5b1,6b1)+avg(5b2,6b2)"}, // 4: (3,4)
+    {"avg(5b3,6b3)+avg(5b4,6b4)", "avg(5b1,6b1)+avg(5b6,6b6)"}, // 5: (4,5)
+    {"avg(5b5,6b5)+avg(5b6,6b6)", "avg(5b2,6b2)+avg(5b4,6b4)"}, // 6: (4,11)
+    {"avg((10b4+10b5),12a2)", "avg((10b2+10b6),12a1)"}, // 7: (6,7)
+    {"avg((10b4+10b5),12a2)", "avg((10b2+10b6),12a1)"}, // 8: (7,9)
+    {"13a1", "13a2"}, // 9: (9,12)
+    {"18a1", "18a2"}, // 10: (10,12)
+    {"2a1", "2a2"}, // 11
+    {"link[2]-link[4]", "link[2]-link[4]"}, // 12
+    {"10b5+10b3", "10b1+10b2"}, // 13
+    {"link[5]-link[6]", "link[5]-link[6]"}, // 14
+    {"16a1", "16a2"}, // 15
+    {"16a2", "16a1"}, // 16
+    {"link[6]+link[14]", "link[12]+link[18]"}, // 17
+    {"15a1", "15a2"}  // 18
 };
+
 
 // === Print Helpers ===
 
@@ -279,6 +280,9 @@ static double evalSimpleExpr(const string &s) {
     return parseExpression();
 }
 
+// Storage for computed link values: pair(firstFormula, secondFormula). index 0 unused
+vector<pair<double,double>> link_values;
+vector<pair<double,double>> link_values_ground;
 
 // Calculate a direction/formula value.
 double calculateDir(const string& formula, const vector<pair<double,double>>& values, bool useFirst = true) {
@@ -298,6 +302,22 @@ double calculateDir(const string& formula, const vector<pair<double,double>>& va
             if (i < formula.size() && formula[i] == ']') ++i;
             double value = 0.0;
             if (idx >= 0 && idx < (int)values.size()) value = (useFirst ? values[idx].first : values[idx].second);
+            ostringstream oss;
+            oss << setprecision(12) << value;
+            expr += oss.str();
+            continue;
+        }
+
+        // Handle glink[n] references (force use of link_values_ground)
+        if (formula.compare(i, 6, "glink[") == 0) {
+            i += 6;
+            size_t start = i;
+            while (i < formula.size() && isdigit((unsigned char)formula[i])) ++i;
+            int idx = 0;
+            if (i > start) idx = stoi(formula.substr(start, i - start));
+            if (i < formula.size() && formula[i] == ']') ++i;
+            double value = 0.0;
+            if (idx >= 0 && idx < (int)link_values_ground.size()) value = (useFirst ? link_values_ground[idx].first : link_values_ground[idx].second);
             ostringstream oss;
             oss << setprecision(12) << value;
             expr += oss.str();
@@ -364,38 +384,16 @@ double calculateDir(const string& formula, const vector<pair<double,double>>& va
     return evalSimpleExpr(expr);
 }
 
-// Storage for computed link values: pair(firstFormula, secondFormula). index 0 unused
-vector<pair<double,double>> link_values;
-vector<pair<double,double>> link_values_ground;
-
-void computeLink17(vector<pair<double,double>>& values) {
-    if (values.size() <= 18) {
-        cerr << "Cannot compute link 17: not enough link values." << endl;
-        return;
-    }
-
-    // f(11,15) is x (values[17].first), f(15,11) is y (values[17].second)
-    // x - y = (f(4,11)+f(5,11)) - (f(11,4)+f(11,5))
-    double rhs1 = (values[6].first + values[14].first);
-
-    // x - y = (f(15,3)+f(15,12)) - (f(3,15)+f(12,15))
-    double rhs2 =  (values[12].first + values[18].first);
-
-    values[17] = {rhs1, rhs2};
-}
-
 // Compute all link values from `link_formulas` using `calculateDir` and store them
 void computeLinkValues(const vector<pair<string,string>>& formulas, vector<pair<double,double>>& values) {
     values.clear();
     values.resize(formulas.size(), {0.0,0.0});
     for (size_t i = 1; i < formulas.size(); ++i) {
-        if (i == 17) continue;
         const auto& p = formulas[i];
         double v1 = calculateDir(p.first, values, true);
         double v2 = calculateDir(p.second, values, false);
         values[i] = {v1, v2};
     }
-    computeLink17(values);
 }
 
 // === Data Reading with Day-of-Week Fallback ===

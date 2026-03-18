@@ -1,0 +1,34 @@
+Row 1: A1: Core Station (data from thermal cameras) | N1: Scaling Factors
+Row 2: A2: LINK NO. | B2: LINK | C2: LENGTH | D2: DIRECTION →  | E2: DIRECTION ← | F2: XK,1,3 | G2: XK,2,3 | H2: XK,3,3 | I2: XK,4,3 | J2: XK,5,3 | K2: XK,6,3 | L2: XK,7,3 | M2: ZK | N2: FK,1,3 | O2: FK,2,3 | P2: FK,3,3 | Q2: FK,4,3 | R2: FK,5,3 | S2: FK,6,3 | T2: FK,7,3
+Row 3: B3: (1,2) | D3: ((2b5+2b3)+1b3)/2 | E3: ((2b2+2b1)+1b1)/2 | M3: =AVERAGE(H3:J3) | S3: =M3/K3
+Row 4: B4: (2,3) | D4: ((2b4+2b3)+1b3)/2 | E4: ((2b6+2b1)+1b1)/2 | M4: =AVERAGE(H4:J4) | S4: =M4/K4
+Row 5: B5: (2,10) | D5: ((2b5+2b6)+9a1+10a1)/3 | E5: ((2b2+2b4)+9a2+10a2)/3 | M5: =AVERAGE(H5:J5) | S5: =M5/K5
+Row 6: B6: (3,4) | D6: 3or4b3+3or4b5 | E6: 3/4b1+3/4b2 | M6: =AVERAGE(H6:J6) | S6: =M6/K6
+Row 7: B7: (4,5) | D7: 3/4b3+3/4b4 | E7: 3/4b1+3/4b6 | M7: =AVERAGE(H7:J7) | S7: =M7/K7
+Row 8: B8: (4,11) | D8: 3/4b5+3/4b6 | E8: 3/4b2+3/4b4 | M8: =AVERAGE(H8:J8) | S8: =M8/K8
+Row 9: B9: (6,7) | D9: (5a2+6a2)/2 | E9: (5a1+6a1)/2 | M9: =AVERAGE(H9:J9) | S9: =M9/K9
+Row 10: B10: (7,9) | D10: (5a2+6a2)/2 | E10: (5a1+6a1)/2 | M10: =AVERAGE(H10:J10) | S10: =M10/K10
+Row 11: B11: (9,12) | D11: (7a1+8a1)/2 | E11: (7a2+8a2)/2 | M11: =AVERAGE(H11:J11) | S11: =M11/K11
+Row 12: B12: (10,12) | D12: (9a1+10a1)/2 | E12: (9a2+10a2)/2 | M12: =AVERAGE(H12:J12) | S12: =M12/K12
+Row 14: N14: Group Scaling Factors
+Row 15: N15: F1,3 | O15: F2,3 | P15: F3,3 | Q15: F4,3 | R15: F5,3 | S15: F6,3 | T15: F7,3
+Row 16: N16: =SUM(N3:N12)/10 | O16: =SUM(O3:O12)/10 | P16: =SUM(P3:P12)/10 | Q16: =SUM(Q3:Q12)/10 | R16: =SUM(R3:R12)/10 | S16: =SUM(S3:S12)/10 | T16: =SUM(T3:T12)/10
+Row 17: N17: Var_F1,3 | O17: Var_F2,3 | P17: Var_F3,3 | Q17: Var_F4,3 | R17: Var_F5,3 | S17: Var_F6,3 | T17: Var_F7,3
+Row 18: N18: =(SUMSQ(N3:N12)-10*N16^2)/9 | O18: =(SUMSQ(O3:O12)-10*O16^2)/9 | P18: =(SUMSQ(P3:P12)-10*P16^2)/9 | Q18: =(SUMSQ(Q3:Q12)-10*Q16^2)/9 | R18: =(SUMSQ(R3:R12)-10*R16^2)/9 | S18: =(SUMSQ(S3:S12)-10*S16^2)/9 | T18: =(SUMSQ(T3:T12)-10*T16^2)/9
+Row 19: N19: E1,3 | O19: E2,3 | P19: E3,3 | Q19: E4,3 | R19: E5,3 | S19: E6,3 | T19: E7,3
+Row 20: N20: =SQRT(N18/10) | O20: =SQRT(O18/10) | P20: =SQRT(P18/10) | Q20: =SQRT(Q18/10) | R20: =SQRT(R18/10) | S20: =SQRT(S18/10) | T20: =SQRT(T18/10)
+Row 21: N21: \epsilon_1,3 | O21: \epsilon_2,3 | P21: \epsilon_3,3 | Q21: \epsilon_4,3 | R21: \epsilon_5,3 | S21: \epsilon_6,3 | T21: \epsilon_7,3
+Row 22: S22: =2.228*S20/S16
+Row 23: A23: Coverage Station (data from RGB cameras)
+Row 24: A24: LINK NO. | B24: LINK | C24: LENGTH | D24: DIRECTION →  | E24: DIRECTION ← | F24: XJ,1,3 | G24: XJ,2,3 | H24: XJ,3,3 | I24: XJ,4,3 | J24: XJ,5,3 | K24: XJ,6,3 | L24: XJ,7,3 | M24: ZJ
+Row 25: B25: (1,13) | C25: =282.839755+21.794461+134.716298 | D25: 2a1 | E25: 2a2
+Row 26: B26: (3,15) | C26: =162.183281+137.804533+55.302739+10.646264 | D26: 19b5+19b6 | E26: 19b2+19b4
+Row 27: B27: (5,6) | D27: ((8b3+8b4)+(10b5+10b3))/2 | E27: ((8b1+8b6)+(10b1+10b2))/2
+Row 28: B28: (5,11) | C28: =131.966506+190.379072 | D28: 8b5+8b6 | E28: 8b2+8b4
+Row 29: B29: (8,9) | C29: =213.769752-60 | D29: 16a1 | E29: 16a2 | F29: #VALUE! | G29: #VALUE! | H29: #VALUE! | I29: #VALUE! | J29: #VALUE! | K29: #VALUE! | L29: #VALUE!
+Row 30: B30: (8,14) | C30: =146.515361+60 | D30: 16a2 | E30: 16a1 | F30: #VALUE! | G30: #VALUE! | H30: #VALUE! | I30: #VALUE! | J30: #VALUE! | K30: #VALUE! | L30: #VALUE!
+Row 31: B31: (11,15) | D31: f(4,11)+f(5,11) | E31: f(3,15)+f(12,15)
+Row 32: B32: (12,15) | D32: 15a1 | E32: 15a2
+Row 34: D34: BKM
+Row 35: B35: Z^bar | D35: =(SUMPRODUCT(M25:M28,C25:C28)+SUMPRODUCT(C31:C32,M31:M32))/(SUM(C25:C28)+SUM(C31:C32))
+Row 36: B36: T | D36: =SUMPRODUCT(C3:C12,M3:M12)+D35
